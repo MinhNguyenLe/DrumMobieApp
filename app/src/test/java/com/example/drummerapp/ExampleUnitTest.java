@@ -1,4 +1,4 @@
-package com.example.drumapp;
+package com.example.drummerapp;
 
 import org.junit.Test;
 
