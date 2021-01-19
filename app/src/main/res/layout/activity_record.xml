@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/gradient_record"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_head_record"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:gravity="center"
+        android:textColor="#F687AD"
+        android:text="MUSIC MAKER"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:textColor="#EA437C"
+        android:textStyle="italic"
+        android:id="@+id/tv_recording"
+        app:layout_constraintTop_toBottomOf="@id/tv_head_record"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:text="RECORDING"
+        android:textSize="30dp" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tv_record_voice"
+        app:layout_constraintTop_toBottomOf="@id/tv_recording"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal"
+        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:weightSum="4"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="12dp">
+        <ImageButton
+            android:layout_width="240dp"
+            android:layout_marginLeft="80dp"
+            android:layout_height="200dp"
+            android:src="@drawable/micro3jpg"
+            android:scaleType="fitXY"/>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:textColor="#F80054"
+        android:id="@+id/tv_record_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_record_voice"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:gravity="center"
+        android:text="02m00s"
+        android:textSize="30dp"/>
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/tv_record_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:textSize="16dp"
+        android:textColor="#fff"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:text="PAUSE"
+        android:layout_weight="1"
+        android:background="@drawable/gradient_play"/>
+    <Button
+
+        android:textSize="16dp"
+        android:textColor="#fff"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:text="STOP"
+        android:layout_weight="1"
+        android:background="@drawable/gradient"/>
+        <Button
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:text="PLAY"
+            android:layout_weight="1"
+            android:background="@drawable/gradient_play"/>
+</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
