@@ -828,13 +828,21 @@
                     android:contentDescription="NEXT"
                     android:src="@android:drawable/ic_media_next"/>
                 <ImageButton
-                    android:id="@+id/saveid1"
+                    android:id="@+id/saveid"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/DarkRed"
                     android:contentDescription="SAVE"
                     android:src="@drawable/ic_baseline_save_alt_32"/>
+                <ImageButton
+                    android:id="@+id/deleteid"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/DarkRed"
+                    android:contentDescription="DELETE"
+                    android:src="@drawable/ic_baseline_delete_32"/>
                 <SeekBar
                     android:id="@+id/volumebarid"
                     android:layout_weight="1"

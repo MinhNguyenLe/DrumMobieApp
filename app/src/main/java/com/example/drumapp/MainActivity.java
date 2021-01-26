@@ -3,34 +3,43 @@ package com.example.drumapp;//Package
 
 //Libraries
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 //Main Class
 public class MainActivity extends AppCompatActivity {
+    private static final String SAVE_FILE_NAME = "listbeats.txt";
     //Declare Checkboxes
     Button[][] sounds;
     boolean[][] checkeds;
@@ -51,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
     ImageButton add;
     ImageButton back;
     ImageButton next;
+    ImageButton delete;
     Button middle;
     ImageButton save;
     ImageButton dup;
     ImageButton play;
-    ImageButton setting;
+    Button setting;
     ImageView playhead;
     SeekBar speedbar;
     SeekBar volumebar;
@@ -70,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
     String saveString = "";
     String finalSave = "";
+    String fileName = "";
+    String listBeats = "";
 
     int currentpage;
     int totalpages;
@@ -78,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     int volume;
     int ids;
 
-    final List<String> saveList = new ArrayList<String>();
+    List<String> saveList = new ArrayList<String>();
 
     final int defaultx = 35;
     final int speedmult = 10;
@@ -145,9 +157,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-            //Log.i("[ONCLICK]", soundname);
         }
     };
+
     //Define Control Bar Functions
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 String tmpName = name;
                 tmpName += (j + 1) + "id";
-                Log.i("[ONSET]", tmpName);
                 sounds[i][j] = (Button) findViewById(getResources().getIdentifier(tmpName, "id", getPackageName()));
                 sounds[i][j].setOnClickListener(PadBtnOnClick);
                 if((j + 1) % 4 == 0)
@@ -205,13 +216,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         play = (ImageButton) findViewById(R.id.playid);
-        save = (ImageButton) findViewById(R.id.saveid1);
+        save = (ImageButton) findViewById(R.id.saveid);
+        delete = (ImageButton) findViewById(R.id.deleteid);
         add = (ImageButton) findViewById(R.id.addid);
         back = (ImageButton) findViewById(R.id.backid);
         next = (ImageButton) findViewById(R.id.nextid);
         middle = (Button) findViewById(R.id.middleid);
         dup = (ImageButton) findViewById(R.id.dupid);
-        setting = (ImageButton) findViewById(R.id.settingid);
+        setting = (Button) findViewById(R.id.settingid);
         saveList.add("01020304050607080910111213141516$s20");
 
         record = (Button) findViewById(R.id.recordid);
@@ -260,6 +272,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 add();
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -320,6 +338,23 @@ public class MainActivity extends AppCompatActivity {
         });
         setUI();
     }
+
+    private void delete() {
+        if(saveList.size() == 1 && currentpage == 1)
+            clearAll();
+        else
+        {
+            saveList.remove(currentpage-1);
+            totalpages --;
+            if(currentpage > 1)
+                currentpage --;
+            speed = (speedbar.getProgress() + 1);
+            speed = (int) (Math.round(speed / 10) * 10);
+            setUI();
+            loadpage(currentpage);
+        }
+    }
+
     public void add() {
         if (totalpages != currentpage) {
             save();
@@ -333,15 +368,12 @@ public class MainActivity extends AppCompatActivity {
         currentpage = totalpages;
         speed = (speedbar.getProgress() + 1);
         speed = (int) (Math.round(speed / 10) * 10);
-        if (speed <= 9) {
+        if (speed <= 9)
             saveList.add("01020304050607080910111213141516$s0" + speed);
-        }
-        else if (speed == 100) {
+        else if (speed == 100)
             saveList.add("01020304050607080910111213141516$s" + speed);
-        }
-        else {
+        else
             saveList.add("01020304050607080910111213141516$s90");
-        }
         clearAll();
         setUI();
         speedbar.setProgress(speed);
@@ -556,19 +588,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveAll() {
-/*        finalSave = "";
-        for (int p = 1; p <= totalpages; p++) {
-            currentpage = p;
-            loadpage(currentpage);
-            save();
-            saveList.set(p - 1, saveString);
-        }
-        for (String page : saveList) {
-            finalSave = finalSave + page + "||";
-        }
-        Intent intent = new Intent(MainActivity.this, nameScreen.class);
-        intent.putExtra("content", finalSave);
-        startActivity(intent);*/
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Insert Name For The Beat");
+        alert.setMessage("Message");
+
+        final EditText input = new EditText(this);
+        alert.setView(input);
+        alert.setPositiveButton("Save", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                fileName = input.getText().toString();
+                finalSave = "";
+                for (int p = 1; p <= totalpages; p++) {
+                    currentpage = p;
+                    loadpage(currentpage);
+                    save();
+                    saveList.set(p - 1, saveString);
+                }
+                for (String page : saveList) {
+                    finalSave = finalSave + page + "-";
+                }
+                fileName+=".txt";
+                savedata(fileName, finalSave);
+                listBeats += fileName + "-";
+                savedata(SAVE_FILE_NAME,listBeats);
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                // Canceled.
+            }
+        });
+        alert.show();
+
+      //  writeToFile(finalSave);
     }
 
     public void loadAll(String loadString) {
@@ -600,15 +658,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setting() {
+    private void setting(){
         playing = false;
-        play.setImageResource(R.drawable.ic_baseline_pause_32);
+        play.setImageResource(R.drawable.ic_baseline_play_arrow_32);
         isRendering = false;
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 
     public void play() {
+
         speed = (speedbar.getProgress() + 1) * speedmult;
         speed = (int) (Math.round(speed / 10) * 10);
         if (!playing) {
@@ -761,10 +820,83 @@ public class MainActivity extends AppCompatActivity {
                     sounds[i][j].setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.shape_normal, null));
             }
     }
-
+    // save data
+    public void savedata(String name, String save) {
+        String text = save;
+        FileOutputStream fos = null;
+        try
+        {
+            fos = openFileOutput(name, MODE_PRIVATE);
+            fos.write(text.getBytes());
+            if(name != SAVE_FILE_NAME)
+                Toast.makeText(this, "Saved to " + getFilesDir() + "/" + name.substring(0,name.length()-4), Toast.LENGTH_LONG).show();
+        }
+        catch (FileNotFoundException e) { e.printStackTrace(); }
+        catch (IOException e) { e.printStackTrace(); }
+        finally
+        {
+            if (fos != null)
+            {
+                try
+                {
+                    fos.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    public String loaddata(String name) {
+        FileInputStream fis = null;
+        try
+        {
+            fis = openFileInput(name);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+            while ((text = br.readLine()) != null)
+                sb.append(text).append("\n");
+            return sb.toString();
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        catch (IOException e) {e.printStackTrace();}
+        finally {
+            if (fis != null)
+            {
+                try
+                {
+                    fis.close();
+                } catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "";
+    }
+    public void LoadBeat (String name)
+    {
+        String[] loadbeat = loaddata(name).split("-");
+        saveList = new ArrayList<String>();
+        for(int i = 0; i< loadbeat.length;i++)
+            saveList.add(loadbeat[i]);
+/*        for(int i = 0; i< saveList.size();i++)
+            Log.i("[LOAD]",saveList.get(i));*/
+        totalpages = loadbeat.length;
+        currentpage = 1;
+        clearAll();
+        setUI();
+        speed = (speedbar.getProgress() + 1);
+        speed = (int) (Math.round(speed / 10) * 10);
+        speedbar.setProgress(speed);
+        speed = (speedbar.getProgress() + 1) * speedmult;
+        loadpage(currentpage);
+    }
     private void record() {
         Intent intent = new Intent(this, RecordActivity.class);
         startActivity(intent);
     }
-
 }
