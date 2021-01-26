@@ -19,7 +19,6 @@
         android:textSize="40dp" />
 
     <TextView
-        android:textStyle="italic"
         android:id="@+id/tv_setting"
         app:layout_constraintTop_toBottomOf="@id/tv_head_setting"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:textSize="30dp"
-        android:text="SỐ LƯỢNG NHIP"
+        android:text="CHANGE SOUNDS"
         android:layout_weight="2"/>
 
         <Spinner
@@ -66,17 +65,12 @@
     android:layout_width="match_parent"
     android:weightSum="4">
 
-    <CheckBox
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_weight="0" />
-
-    <TextView
+        <TextView
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:textSize="30dp"
         android:gravity="center"
-        android:text="NAME"
+        android:text="High Hat"
         android:layout_weight="2"/>
 
     <Button
@@ -100,17 +94,12 @@
         android:layout_width="match_parent"
         android:weightSum="4">
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="0"/>
-
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:textSize="30dp"
             android:gravity="center"
-            android:text="NAME"
+            android:text="Kick"
             android:layout_weight="2"/>
 
         <Button
@@ -134,17 +123,12 @@
         android:layout_width="match_parent"
         android:weightSum="4">
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="0"/>
-
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:textSize="30dp"
             android:gravity="center"
-            android:text="NAME"
+            android:text="Snare"
             android:layout_weight="2"/>
 
         <Button
@@ -168,17 +152,12 @@
         android:layout_width="match_parent"
         android:weightSum="4">
 
-        <CheckBox
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="0"/>
-
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:textSize="30dp"
             android:gravity="center"
-            android:text="NAME"
+            android:text="Keys"
             android:layout_weight="2"/>
 
         <Button
@@ -202,17 +181,41 @@
         android:layout_width="match_parent"
         android:weightSum="4">
 
-        <CheckBox
+        <TextView
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="0"/>
+            android:layout_width="0dp"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:text="Bass"
+            android:layout_weight="2"/>
+
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:text="EDIT"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:text="DELETE"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/beat_6"
+        app:layout_constraintTop_toBottomOf="@id/beat_5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:weightSum="4">
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:textSize="30dp"
             android:gravity="center"
-            android:text="NAME"
+            android:text="Bongo"
             android:layout_weight="2"/>
 
         <Button
