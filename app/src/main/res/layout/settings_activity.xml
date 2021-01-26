@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout android:background="@drawable/gradient_setting"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/White"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +16,7 @@
         android:layout_height="80dp"
         android:gravity="center"
         android:text="MUSIC MAKER"
-        android:textColor="#22B0F1"
+        android:textColor="@color/Chocolate"
         android:textSize="40dp" />
 
     <TextView
@@ -35,199 +36,219 @@
         android:id="@+id/layout_control"
         app:layout_constraintTop_toBottomOf="@id/tv_setting"
         app:layout_constraintLeft_toLeftOf="parent"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:weightSum="3">
-
-    <TextView
-        android:textColor="#173AF8"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:textSize="30dp"
-        android:text="CHANGE SOUNDS"
-        android:layout_weight="2"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-</LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/beat_1"
-        app:layout_constraintTop_toBottomOf="@id/layout_control"
-        app:layout_constraintLeft_toLeftOf="parent"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:weightSum="4">
-
-        <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:text="High Hat"
-        android:layout_weight="2"/>
-
-    <Button
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:text="EDIT"
-        android:layout_weight="1"/>
-    <Button
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:text="DELETE"
-        android:layout_weight="1"/>
-
-</LinearLayout>
-    <LinearLayout
-        android:id="@+id/beat_2"
-        app:layout_constraintTop_toBottomOf="@id/beat_1"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="Kick"
-            android:layout_weight="2"/>
-
-        <Button
+        android:layout_height="0dp"
+        android:layout_width="match_parent">
+        <GridLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="EDIT"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="DELETE"
-            android:layout_weight="1"/>
+            android:background="@color/White"
+            android:rowCount="6">
+            <LinearLayout
+                android:id="@+id/beat_1"
+                app:layout_constraintTop_toBottomOf="@id/layout_control"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:weightSum="6">
 
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="High Hat"
+                    android:layout_weight="3"/>
+                <Spinner
+                    android:id="@+id/hhspinner"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageButton
+                    android:id="@+id/hhplay"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="PLAY"
+                    android:src="@android:drawable/ic_media_play"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/beat_2"
+                app:layout_constraintTop_toBottomOf="@id/layout_control"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="Kick"
+                    android:layout_weight="3"/>
+
+                <Spinner
+                    android:id="@+id/kispinner"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageButton
+                    android:id="@+id/kiplay"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="PLAY"
+                    android:src="@android:drawable/ic_media_play"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/beat_3"
+                android:layout_column="1"
+                android:layout_row="2"
+                app:layout_constraintTop_toBottomOf="@id/layout_control"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="Snare"
+                    android:layout_weight="3"/>
+
+                <Spinner
+                    android:id="@+id/snspinner"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageButton
+                    android:id="@+id/snplay"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="PLAY"
+                    android:src="@android:drawable/ic_media_play"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/beat_4"
+                app:layout_constraintTop_toBottomOf="@id/layout_control"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_column="1"
+                android:layout_row="3"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="KeysBell"
+                    android:layout_weight="3"/>
+
+                <Spinner
+                    android:id="@+id/pispinner"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageButton
+                    android:id="@+id/piplay"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="PLAY"
+                    android:src="@android:drawable/ic_media_play"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/beat_5"
+                android:layout_column="1"
+                android:layout_row="4"
+                app:layout_constraintTop_toBottomOf="@id/layout_control"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="Bass"
+                    android:layout_weight="3"/>
+
+                <Spinner
+                    android:id="@+id/baspinner"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageButton
+                    android:id="@+id/baplay"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="PLAY"
+                    android:src="@android:drawable/ic_media_play"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/beat_6"
+                app:layout_constraintTop_toBottomOf="@id/layout_control"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_column="1"
+                android:layout_row="5"
+                android:weightSum="6">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="Bongo"
+                    android:layout_weight="3"/>
+
+                <Spinner
+                    android:id="@+id/bospinner"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageButton
+                    android:id="@+id/boplay"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="PLAY"
+                    android:src="@android:drawable/ic_media_play"/>
+
+            </LinearLayout>
+        </GridLayout>
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/beat_3"
-        app:layout_constraintTop_toBottomOf="@id/beat_2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:weightSum="4">
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="Snare"
-            android:layout_weight="2"/>
-
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="EDIT"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="DELETE"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/beat_4"
-        app:layout_constraintTop_toBottomOf="@id/beat_3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="Keys"
-            android:layout_weight="2"/>
-
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="EDIT"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="DELETE"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/beat_5"
-        app:layout_constraintTop_toBottomOf="@id/beat_4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="Bass"
-            android:layout_weight="2"/>
-
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="EDIT"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="DELETE"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/beat_6"
-        app:layout_constraintTop_toBottomOf="@id/beat_5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:text="Bongo"
-            android:layout_weight="2"/>
-
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="EDIT"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:text="DELETE"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
