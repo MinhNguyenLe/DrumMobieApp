@@ -30,6 +30,7 @@
 
 
         <Button
+            android:id="@+id/recordid"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_margin="10dp"
@@ -50,6 +51,7 @@
       >
 
         <Button
+            android:id="@+id/beatid"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_margin="10dp"

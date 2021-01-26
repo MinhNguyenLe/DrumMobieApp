@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton dup;
     ImageButton play;
     Button setting;
+    Button home;
     ImageView playhead;
     SeekBar speedbar;
     SeekBar volumebar;
@@ -238,6 +239,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 record();
+            }
+        });
+        home = (Button) findViewById(R.id.homeid);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home();
             }
         });
 
@@ -1017,7 +1025,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RecordActivity.class);
         startActivity(intent);
     }
-
+    private void home() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
     private void setting(){
         playing = false;
         play.setImageResource(R.drawable.ic_baseline_play_arrow_32);
