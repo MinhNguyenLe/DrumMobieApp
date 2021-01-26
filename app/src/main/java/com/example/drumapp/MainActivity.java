@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     //Declare Checkboxes
     Button[][] sounds;
     boolean[][] checkeds;
-
+    public static MainActivity _instance;
     //Declare Sounds
     SoundPool sp;
     int hihat;
@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
     int piano;
     int bass;
     int bongo;
-    int closed;
-    int open;
 
     //Declare UI Elements
 
@@ -141,8 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case "hh":
                         sounds[i][soundIndex].setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.shape_choosen_hh, null));
-                        sp.stop(open);
-                        sp.play(closed, 1, 1, 0, 0, 1);
+                        sp.play(hihat, 1, 1, 0, 0, 1);
                         break;
                     case "ki":
                         sounds[i][soundIndex].setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.shape_choosen_ki, null));
@@ -182,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 1);
         }
+        _instance = this;
         ids = 1;
         currentpage = 1;
 
@@ -191,8 +189,6 @@ public class MainActivity extends AppCompatActivity {
         piano = sp.load(this.getApplicationContext(), R.raw.cowbell, 1);
         bass = sp.load(this.getApplicationContext(), R.raw.bass, 1);
         bongo = sp.load(this.getApplicationContext(), R.raw.bongo, 1);
-        closed = sp.load(this.getApplicationContext(), R.raw.closed, 1);
-        open = sp.load(this.getApplicationContext(), R.raw.open, 1);
 
 
         sounds = new Button[6][16];
@@ -362,6 +358,60 @@ public class MainActivity extends AppCompatActivity {
         setUI();
     }
 
+    public void setSounds(String soundname, int level)
+    {
+        switch (soundname)
+        {
+            case "hh":
+                if(level == 1)
+                    hihat = sp.load(this.getApplicationContext(), R.raw.hihat, 1);
+                if(level == 2)
+                    hihat = sp.load(this.getApplicationContext(), R.raw.hihat2, 1);
+                if(level == 3)
+                    hihat = sp.load(this.getApplicationContext(), R.raw.hithat3, 1);
+                break;
+            case "ki":
+                if(level == 1)
+                    kick = sp.load(this.getApplicationContext(), R.raw.newkick, 1);
+                if(level == 2)
+                    kick = sp.load(this.getApplicationContext(), R.raw.kick2, 1);
+                if(level == 3)
+                    kick = sp.load(this.getApplicationContext(), R.raw.kick3, 1);
+                break;
+            case "sn":
+                if(level == 1)
+                    snare = sp.load(this.getApplicationContext(), R.raw.snare, 1);
+                if(level == 2)
+                    snare = sp.load(this.getApplicationContext(), R.raw.snare2, 1);
+                if(level == 3)
+                    snare = sp.load(this.getApplicationContext(), R.raw.snare3, 1);
+                break;
+            case "pi":
+                if(level == 1)
+                    piano = sp.load(this.getApplicationContext(), R.raw.cowbell, 1);
+                if(level == 2)
+                    piano = sp.load(this.getApplicationContext(), R.raw.cowbell2, 1);
+                if(level == 3)
+                    piano = sp.load(this.getApplicationContext(), R.raw.cowbell3, 1);
+                break;
+            case "ba":
+                if(level == 1)
+                    bass = sp.load(this.getApplicationContext(), R.raw.bass, 1);
+                if(level == 2)
+                    bass = sp.load(this.getApplicationContext(), R.raw.bass2wav, 1);
+                if(level == 3)
+                    bass = sp.load(this.getApplicationContext(), R.raw.bass3, 1);
+                break;
+            case "bo":
+                if(level == 1)
+                    bongo = sp.load(this.getApplicationContext(), R.raw.bongo, 1);
+                if(level == 2)
+                    bongo = sp.load(this.getApplicationContext(), R.raw.bongo2, 1);
+                if(level == 3)
+                    bongo = sp.load(this.getApplicationContext(), R.raw.bongo3, 1);
+                break;
+        }
+    }
     private void load() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         String[] filebeats = loaddata(SAVE_FILE_NAME).split("-");
@@ -736,14 +786,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setting(){
-        playing = false;
-        play.setImageResource(R.drawable.ic_baseline_play_arrow_32);
-        isRendering = false;
-        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
     public void play() {
 
         speed = (speedbar.getProgress() + 1) * speedmult;
@@ -782,8 +824,7 @@ public class MainActivity extends AppCompatActivity {
         float volumex = (float)volume/100;
         Log.i("[ONCLICK]", (float)volumex + "");
         if (hh) {
-            sp.stop(open);
-            sp.play(closed, volumex, volumex, 0, 0, 1);
+            sp.play(hihat, volumex, volumex, 0, 0, 1);
             saveString = saveString + "hh";
         }
         if (ki) {
@@ -974,6 +1015,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void record() {
         Intent intent = new Intent(this, RecordActivity.class);
+        startActivity(intent);
+    }
+
+    private void setting(){
+        playing = false;
+        play.setImageResource(R.drawable.ic_baseline_play_arrow_32);
+        isRendering = false;
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 }
