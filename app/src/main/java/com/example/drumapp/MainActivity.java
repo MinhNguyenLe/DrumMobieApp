@@ -14,14 +14,19 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -33,8 +38,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
-
+import java.util.ListIterator;
 
 
 //Main Class
@@ -61,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton back;
     ImageButton next;
     ImageButton delete;
+    ImageButton clear;
+    Button load;
     Button middle;
     ImageButton save;
     ImageButton dup;
@@ -218,12 +227,14 @@ public class MainActivity extends AppCompatActivity {
         play = (ImageButton) findViewById(R.id.playid);
         save = (ImageButton) findViewById(R.id.saveid);
         delete = (ImageButton) findViewById(R.id.deleteid);
+        clear = (ImageButton) findViewById(R.id.clearid);
         add = (ImageButton) findViewById(R.id.addid);
         back = (ImageButton) findViewById(R.id.backid);
         next = (ImageButton) findViewById(R.id.nextid);
         middle = (Button) findViewById(R.id.middleid);
         dup = (ImageButton) findViewById(R.id.dupid);
         setting = (Button) findViewById(R.id.settingid);
+        load = (Button) findViewById(R.id.loadid);
         saveList.add("01020304050607080910111213141516$s20");
 
         record = (Button) findViewById(R.id.recordid);
@@ -278,6 +289,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 delete();
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear();
+            }
+        });
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                load();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -337,6 +360,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setUI();
+    }
+
+    private void load() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        String[] filebeats = loaddata(SAVE_FILE_NAME).split("-");
+        alert.setTitle("Choose The Beat");
+        // Set an EditText view to get user input
+        final EditText editText = new EditText(this);
+        LinearLayout layout = new LinearLayout(getApplicationContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(100,0,100,0);
+        for(int i = 0; i <filebeats.length; i++)
+        {
+            if(filebeats[i].length() > 4)
+            {
+                final TextView listbeat = new TextView(this);
+                listbeat.setText(i + 1 + ".\t" + filebeats[i].substring(0,filebeats[i].length()-4));
+                layout.addView(listbeat);
+            }
+        }
+
+        layout.addView(editText);
+        alert.setView(layout);
+
+        alert.setPositiveButton("Load", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                String namefile = editText.getText() + ".txt";
+                LoadBeat(namefile);
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+
+    }
+
+    private void clear() {
+        clearAll();
+        saveList = new ArrayList<String>();
+        currentpage = 1;
+        totalpages = 1;
+        ids = 1;
+        playing = false;
+        saving = false;
+        saveString = "";
+        setUI();
+        speed = (speedbar.getProgress() + 1);
+        speed = (int) (Math.round(speed / 10) * 10);
+        saveList.add(0,saveString);
     }
 
     private void delete() {
@@ -882,10 +960,9 @@ public class MainActivity extends AppCompatActivity {
         String[] loadbeat = loaddata(name).split("-");
         saveList = new ArrayList<String>();
         for(int i = 0; i< loadbeat.length;i++)
-            saveList.add(loadbeat[i]);
-/*        for(int i = 0; i< saveList.size();i++)
-            Log.i("[LOAD]",saveList.get(i));*/
-        totalpages = loadbeat.length;
+            if(loadbeat[i].length() >= 10)
+                saveList.add(loadbeat[i]);
+        totalpages = saveList.size();
         currentpage = 1;
         clearAll();
         setUI();

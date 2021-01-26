@@ -17,36 +17,52 @@
             android:layout_width="0dp"
             android:text="RECORD"
             android:drawableLeft="@drawable/ic_baseline_mic_32"
-            android:background="@color/White"
+            android:background="@color/LightPink"
+            android:layout_marginTop="-2dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="2dp"
             android:layout_height="40dp"/>
         <Button
             android:layout_weight="1"
-            android:id="@+id/mixerid"
+            android:id="@+id/loadid"
             android:layout_width="0dp"
-            android:text="MIXER"
+            android:layout_marginTop="-2dp"
+            android:layout_marginRight="5dp"
+            android:text="LOAD"
+            android:background="@color/LightGreen"
             android:drawableLeft="@drawable/ic_baseline_audiotrack_32"
             android:layout_height="40dp"/>
-        <Button
+        <TextView
             android:id="@+id/musicmakerid"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/DarkRed"
-            android:textColor="@color/White"
-            android:enabled="false"
+            android:layout_height="match_parent"
+            android:background="@color/White"
+            android:textColor="@color/Chocolate"
+            android:padding="0dp"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
             android:text="MUSIC MAKER"
             android:src="@android:drawable/ic_media_previous"/>
         <Button
             android:layout_weight="1"
             android:id="@+id/settingid"
             android:layout_width="0dp"
+            android:background="@color/LightYellow"
+            android:layout_marginTop="-2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
             android:text="SETTINGS"
             android:drawableLeft="@drawable/ic_baseline_settings_32"
             android:layout_height="40dp"/>
         <Button
             android:layout_weight="1"
+            android:layout_marginTop="-2dp"
+            android:layout_marginRight="2dp"
             android:id="@+id/homeid"
             android:layout_width="0dp"
+            android:background="@color/LightCyan"
             android:text="HOME"
             android:drawableLeft="@drawable/ic_baseline_home_32"
             android:layout_height="40dp"/>
@@ -79,11 +95,9 @@
                     style="@style/PadButton"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:scaleX="1.15"
-                    android:scaleY="1.25"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="#e5e837"
+                    android:background="@drawable/shape_choosen_hh"
                     android:scaleType="fitXY"
                     android:src="@drawable/hihat"
                     android:contentDescription="HIHAT" />
@@ -193,12 +207,10 @@
                 <ImageButton
                     style="@style/PadButton"
                     android:layout_weight="1"
-                    android:scaleX="1.15"
-                    android:scaleY="1.25"
+                    android:background="@drawable/shape_choosen_ki"
                     android:padding="10dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/LightGreen"
                     android:scaleType="fitXY"
                     android:src="@drawable/kick"
                     android:contentDescription="KICK" />
@@ -308,12 +320,10 @@
                 <ImageButton
                     style="@style/PadButton"
                     android:layout_weight="1"
-                    android:scaleX="1.15"
-                    android:scaleY="1.25"
+                    android:background="@drawable/shape_choosen_sn"
                     android:padding="10dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/LightSalmon"
                     android:scaleType="fitXY"
                     android:src="@drawable/snare"
                     android:contentDescription="SNARE" />
@@ -423,12 +433,10 @@
                 <ImageButton
                     style="@style/PadButton"
                     android:layout_weight="1"
-                    android:scaleX="1.15"
-                    android:scaleY="1.25"
+                    android:background="@drawable/shape_choosen_pi"
                     android:padding="10dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/LightCoral"
                     android:scaleType="fitXY"
                     android:src="@drawable/piano"
                     android:contentDescription="PIANO" />
@@ -538,12 +546,10 @@
                 <ImageButton
                     style="@style/PadButton"
                     android:layout_weight="1"
-                    android:scaleX="1.15"
-                    android:scaleY="1.25"
+                    android:background="@drawable/shape_choosen_ba"
                     android:padding="10dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="#c7a3e0"
                     android:scaleType="fitXY"
                     android:src="@drawable/bass"/>
                 <Button
@@ -652,12 +658,10 @@
                 <ImageButton
                     style="@style/PadButton"
                     android:layout_weight="1"
-                    android:scaleX="1.15"
-                    android:scaleY="1.25"
+                    android:background="@drawable/shape_choosen_bo"
                     android:padding="10dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/MediumTurquoise"
                     android:scaleType="fitXY"
                     android:src="@drawable/bongo"/>
                 <Button
@@ -774,15 +778,15 @@
                     android:minWidth="100dp"
                     android:layout_marginTop="5dp"
                     android:progress="50"
-                    android:progressTint="@color/Black"
-                    android:thumbTint="@color/Black" />
+                    android:progressTint="@color/Red"
+                    android:thumbTint="@color/Red" />
 
                 <ImageButton
                     android:id="@+id/playid"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="PLAY"
                     android:src="@android:drawable/ic_media_play"/>
 
@@ -791,7 +795,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="ADD"
                     android:src="@drawable/ic_baseline_add_32"/>
 
@@ -800,7 +804,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="DUPLICATE"
                     android:src="@drawable/ic_baseline_file_copy_24"/>
                 <ImageButton
@@ -808,7 +812,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="BACK"
                     android:src="@android:drawable/ic_media_previous"/>
                 <Button
@@ -817,6 +821,7 @@
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:backgroundTint="@color/White"
                     android:text="0"
                     android:textColor="@color/Black"
                     android:textSize="20sp" />
@@ -826,7 +831,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="NEXT"
                     android:src="@android:drawable/ic_media_next"/>
                 <ImageButton
@@ -834,7 +839,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="SAVE"
                     android:src="@drawable/ic_baseline_save_alt_32"/>
                 <ImageButton
@@ -842,21 +847,29 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/DarkRed"
+                    android:backgroundTint="#5eba7d"
                     android:contentDescription="DELETE"
                     android:src="@drawable/ic_baseline_delete_32"/>
+                <ImageButton
+                    android:id="@+id/clearid"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#5eba7d"
+                    android:contentDescription="CLEAR"
+                    android:src="@drawable/ic_baseline_clear_32"/>
+
                 <SeekBar
                     android:id="@+id/volumebarid"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:backgroundTint="@color/Black"
                     android:maxWidth="100dp"
                     android:minWidth="100dp"
                     android:layout_marginTop="5dp"
                     android:progress="50"
-                    android:progressTint="@color/Black"
-                    android:thumbTint="@color/Black" />
+                    android:progressTint="@color/Teal"
+                    android:thumbTint="@color/Teal" />
             </LinearLayout>
         </GridLayout>
     </RelativeLayout>
